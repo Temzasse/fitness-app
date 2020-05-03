@@ -6,7 +6,7 @@ import { Text } from '../components/common';
 const Home = () => {
   return (
     <Stack>
-      <Text variant="title-1">Home</Text>
+      <Text variant="title-1">Workout</Text>
     </Stack>
   );
 };

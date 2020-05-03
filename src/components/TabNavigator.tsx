@@ -3,7 +3,7 @@ import { Routes, Link, useMatch } from 'react-router-dom';
 import { FiAward } from 'react-icons/fi';
 import { MdDirectionsRun, MdPlaylistAdd } from 'react-icons/md';
 import styled, { useTheme } from 'styled-components';
-import { motion, AnimateSharedLayout } from 'framer-motion';
+import { motion, AnimateSharedLayout, AnimatePresence } from 'framer-motion';
 
 const TabNavigator: React.FC = ({ children }) => {
   const theme = useTheme();
@@ -14,7 +14,19 @@ const TabNavigator: React.FC = ({ children }) => {
   return (
     <Wrapper>
       <Main>
-        <Routes>{children}</Routes>
+        <AnimatePresence initial={false}>
+          <Routes>
+            {React.Children.map(children, (child) => (
+              <TabScreen
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+              >
+                {child}
+              </TabScreen>
+            ))}
+          </Routes>
+        </AnimatePresence>
       </Main>
 
       <AnimateSharedLayout>
@@ -54,11 +66,10 @@ const TAB_HEIGHT = 54;
 
 const Wrapper = styled.div`
   position: relative;
+  background-color: ${(p) => p.theme.colors['grey-10']};
 `;
 
 const Main = styled.main`
-  width: 100%;
-  height: 100%;
   padding-bottom: ${TAB_HEIGHT}px;
 `;
 
@@ -68,6 +79,12 @@ const Tabs = styled.nav`
   right: 0;
   bottom: 0;
   background-color: ${(p) => p.theme.colors.white};
+`;
+
+const TabScreen = styled(motion.div)`
+  min-height: calc(100vh - ${TAB_HEIGHT}px);
+  background-color: ${(p) => p.theme.colors.white};
+  padding: ${p => p.theme.spacing.normal};
 `;
 
 const TabsStack = styled.div`
