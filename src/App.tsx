@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route } from 'react-router-dom';
+import styled from 'styled-components';
+import TabNavigator from './components/TabNavigator';
+import Home from './screens/Home';
+import Catalog from './screens/Catalog';
+import Profile from './screens/Profile';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Wrapper>
+      <TabNavigator>
+        <Route path="/" element={<Home />} />
+        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/profile" element={<Profile />} />
+      </TabNavigator>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 export default App;
