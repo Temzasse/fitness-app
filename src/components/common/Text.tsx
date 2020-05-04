@@ -14,6 +14,8 @@ const variantToTag: { [key in Variant]: Partial<Tags> } = {
   'title-2': 'h2',
   'title-3': 'h3',
   body: 'p',
+  caption: 'span',
+  overline: 'span',
 };
 
 const getAttrs = (p: Props) => ({ as: p.as || variantToTag[p.variant] });

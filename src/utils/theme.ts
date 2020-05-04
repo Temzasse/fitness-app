@@ -68,11 +68,28 @@ export const theme: DefaultTheme = {
       font-weight: 500;
       line-height: 1.25;
     `,
-    'body': css`
+    body: css`
       font-size: 16px;
       font-weight: 400;
       line-height: 1.3;
     `,
+    caption: css`
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.35;
+    `,
+    overline: css`
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.65;
+      text-transform: uppercase;
+    `,
+  },
+  shadows: {
+    small: '0px 1px 4px rgba(8, 35, 48, 0.2)',
+    normal: '0px 4px 8px rgba(8, 35, 48, 0.24)',
+    medium: '0px 8px 16px rgba(8, 35, 48, 0.2)',
+    large: '0px 16px 24px rgba(8, 35, 48, 0.16)',
   },
   breakpoints,
   media,

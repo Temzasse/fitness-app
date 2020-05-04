@@ -1,4 +1,4 @@
-import { AsyncAction } from 'overmind';
+// import { AsyncAction } from 'overmind';
 
 export interface Exercise {
   id: string;
@@ -8,9 +8,10 @@ export interface Exercise {
   levelDescriptions: {
     low: string;
     medium: string;
-    hight: string;
+    high: string;
   };
   environment: 'indoor' | 'outdoor' | 'any';
+  category: 'aerobic' | 'strength' | 'interval' | 'flexibility' | 'other';
   // Eg. "Legs", "Mid body", or "Arms"
   tags: string[];
 }
@@ -25,11 +26,4 @@ export const state: State = {
   items: {},
 };
 
-const loadExercises: AsyncAction = async ({ state, effects }) => {
-  const exercises = await effects.storage.exercises.load();
-  state.exercises = exercises;
-};
-
-export const actions = {
-  loadExercises,
-};
+export const actions = {};

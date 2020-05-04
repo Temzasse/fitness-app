@@ -1,11 +1,10 @@
-import { AsyncAction } from 'overmind';
-import { Exercise } from './exercises';
+// import { AsyncAction } from 'overmind';
+import { Exercise } from './exercise';
 import { Photo } from '../utils/photos';
 
-interface Workout {
+export interface Workout {
   id: string;
   name: string;
-  category: 'aerobic' | 'strength' | 'interval' | 'flexibility' | 'other';
   image: Photo;
   exercises: Exercise[];
   sets: number;
@@ -22,11 +21,4 @@ export const state: State = {
   items: {},
 };
 
-const loadWorkouts: AsyncAction = async ({ state, effects }) => {
-  const workout = await effects.storage.workout.load();
-  state.workout = workout;
-};
-
-export const actions = {
-  loadWorkouts,
-};
+export const actions = {};

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Text } from '../components/common';
-import { useOvermind } from '../models';
+import {  useAppState } from '../models';
 
 const Profile = () => {
-  const { state } = useOvermind();
+  const { state } = useAppState();
   return (
     <div>
       <Text variant="title-1">{state.profile.name}</Text>

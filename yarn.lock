@@ -10038,10 +10038,10 @@ styled-components@5.1.0:
     shallowequal "^1.1.0"
     supports-color "^5.5.0"
 
-styled-layout@0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/styled-layout/-/styled-layout-0.3.1.tgz#c1bbf4585fa89e65ee95f54a0225e2a3cca12b4e"
-  integrity sha512-8MaWMUb68gq3BoPwPYnoU0yqbd2m7IE4yeErWGQj3/ux5mqsJ3ZpYPjtZsRmeuxmE3Jg5hI4f1vFS0gnTpzbPw==
+styled-layout@0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/styled-layout/-/styled-layout-0.3.2.tgz#692f8be29b8b6543378128cc0b6983692130de1f"
+  integrity sha512-NcSFSjMIIfz8PXZzFIbCi5yrmNrsdB7qVJUytr84YAj96izEazvS53z6mV8K42wCJEC6Mz7PGMyXaxeI+nMigA==
 
 stylefire@7.0.3:
   version "7.0.3"

@@ -2,18 +2,20 @@ import { IConfig } from 'overmind';
 import { createHook } from 'overmind-react';
 import * as photos from '../utils/photos';
 import * as storage from '../utils/storage';
-import * as workout from './workout';
-import * as exercises from './exercises';
+import * as workouts from './workout';
+import * as exercises from './exercise';
 import * as profile from './profile';
+import { onInitialize } from './init';
 
 export const config = {
+  onInitialize,
   state: {
-    workout: workout.state,
+    workouts: workouts.state,
     exercises: exercises.state,
     profile: profile.state,
   },
   actions: {
-    workout: workout.actions,
+    workouts: workouts.actions,
     exercises: exercises.actions,
     profile: profile.actions,
   },
@@ -23,7 +25,7 @@ export const config = {
     },
     storage: {
       exercises: storage.createStorage('exercises'),
-      workout: storage.createStorage('workout'),
+      workouts: storage.createStorage('workouts'),
     },
   },
 };
@@ -32,4 +34,4 @@ declare module 'overmind' {
   interface Config extends IConfig<typeof config> {}
 }
 
-export const useOvermind = createHook<typeof config>();
+export const useAppState = createHook<typeof config>();

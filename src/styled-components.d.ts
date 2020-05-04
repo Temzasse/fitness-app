@@ -54,6 +54,14 @@ declare module 'styled-components' {
       'title-2': ReturnType<typeof css>;
       'title-3': ReturnType<typeof css>;
       body: ReturnType<typeof css>;
+      caption: ReturnType<typeof css>;
+      overline: ReturnType<typeof css>;
+    };
+    shadows: {
+      small: string;
+      normal: string;
+      medium: string;
+      large: string;
     };
     breakpoints: Breakpoints;
     media: MediaQuery<Breakpoints>;
