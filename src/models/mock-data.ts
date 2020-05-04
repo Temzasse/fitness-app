@@ -1,5 +1,5 @@
 import { Exercise } from './exercise';
-import { guid, range } from '../utils/common';
+import { guid } from '../utils/common';
 
 export const exercises: Exercise[] = [
   {
@@ -42,15 +42,3 @@ export const exercises: Exercise[] = [
     tags: ['Mid-body'],
   },
 ];
-
-const e = range(20).map((i) => `Harjoitus ${i}`);
-
-export const groupedExercises: {
-  [group in Exercise['category']]: string[];
-} = {
-  aerobic: e,
-  strength: e,
-  interval: e,
-  flexibility: e,
-  other: e,
-};

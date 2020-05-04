@@ -1,4 +1,4 @@
-// import { AsyncAction } from 'overmind';
+import { Derive } from 'overmind';
 
 export interface Exercise {
   id: string;
@@ -16,14 +16,29 @@ export interface Exercise {
   tags: string[];
 }
 
-interface State {
+type ExercisesByCategory = {
+  [group in Exercise['category']]: Exercise[];
+};
+
+type State = {
   ids: string[];
   items: { [id: string]: Exercise };
-}
+  byCategory: Derive<State, ExercisesByCategory>;
+};
 
 export const state: State = {
   ids: [],
   items: {},
+  byCategory: (state) => {
+    return Object.values(state.items).reduce((acc, val) => {
+      if (!acc[val.category]) {
+        acc[val.category] = [val];
+      } else {
+        acc[val.category].push(val);
+      }
+      return acc;
+    }, {} as ExercisesByCategory);
+  },
 };
 
 export const actions = {};

@@ -5,14 +5,10 @@ import Text from './Text';
 
 interface Props {
   segments: { label: string; onClick: () => any }[];
-  initial?: number;
+  active: number;
 }
 
-const SegmentedControl = ({ segments = [], initial = 0 }: Props) => {
-  const [activeSegment, setActiveSegment] = React.useState(
-    Math.min(segments.length - 1, initial)
-  );
-
+const SegmentedControl = ({ segments = [], active = 0 }: Props) => {
   return (
     <Wrapper>
       <AnimateSharedLayout>
@@ -20,11 +16,8 @@ const SegmentedControl = ({ segments = [], initial = 0 }: Props) => {
           <Segment
             key={label}
             label={label}
-            isActive={activeSegment === index}
-            onClick={() => {
-              setActiveSegment(index);
-              onClick();
-            }}
+            isActive={active === index}
+            onClick={onClick}
           />
         ))}
       </AnimateSharedLayout>

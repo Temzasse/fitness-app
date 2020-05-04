@@ -1,29 +1,24 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { MdDirectionsRun, MdPlaylistAdd } from 'react-icons/md';
 import { FiAward } from 'react-icons/fi';
 
-import TabNavigator from './screens/TabNavigator';
+import TabNavigator from './navigation/TabNavigator';
 
-const Home = React.lazy(() => import('./screens/Home'));
-const Catalog = React.lazy(() => import('./screens/Catalog'));
-const Profile = React.lazy(() => import('./screens/Profile'));
+const HomeStack = React.lazy(() => import('./navigation/HomeStack'));
+const CatalogStack = React.lazy(() => import('./navigation/CatalogStack'));
+const ProfileStack = React.lazy(() => import('./navigation/ProfileStack'));
 
 function App() {
   return (
     <Wrapper>
       <TabNavigator
         tabs={[
-          { icon: MdDirectionsRun, to: '/' },
-          { icon: MdPlaylistAdd, to: 'catalog' },
-          { icon: FiAward, to: 'profile' },
+          { component: HomeStack, icon: MdDirectionsRun, to: 'home' },
+          { component: CatalogStack, icon: MdPlaylistAdd, to: 'catalog' },
+          { component: ProfileStack, icon: FiAward, to: 'profile' },
         ]}
-      >
-        <Route path="/" element={<Home />} />
-        <Route path="/catalog" element={<Catalog />} />
-        <Route path="/profile" element={<Profile />} />
-      </TabNavigator>
+      />
     </Wrapper>
   );
 }

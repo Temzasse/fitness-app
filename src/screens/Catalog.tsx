@@ -1,16 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Stack } from 'styled-layout';
+import { Link } from 'react-router-dom';
 import { Text, SegmentedControl } from '../components/common';
 import { useAppState } from '../models';
-import { groupedExercises } from '../models/mock-data';
+import { Exercise } from '../models/exercise';
 
 const Catalog = () => {
   const { state } = useAppState();
-  const exercises = Object.values(state.exercises.items);
+  const exercisesByCategory = Object.entries(state.exercises.byCategory);
+  const [activeSegment, setActiveSegment] = React.useState(0);
 
-  function handleSegmentClick() {
-    console.log('> Segment clicked');
+  function filterByEnvironment(exercise: Exercise) {
+    if (activeSegment === 0) return true;
+    if (activeSegment === 1 && exercise.environment !== 'outdoor') return true;
+    if (activeSegment === 2 && exercise.environment !== 'indoor') return true;
+    return false;
   }
 
   return (
@@ -18,24 +23,25 @@ const Catalog = () => {
       <Text variant="title-1">Harjoitukset</Text>
 
       <SegmentedControl
+        active={activeSegment}
         segments={[
-          { label: 'Kaikki', onClick: handleSegmentClick },
-          { label: 'Sisä', onClick: handleSegmentClick },
-          { label: 'Ulko', onClick: handleSegmentClick },
+          { label: 'Kaikki', onClick: () => setActiveSegment(0) },
+          { label: 'Sisä', onClick: () => setActiveSegment(1) },
+          { label: 'Ulko', onClick: () => setActiveSegment(2) },
         ]}
       />
 
       <ExerciseList>
         <Stack as="ul" dividers="grey-20" spacing="none">
-          {Object.entries(groupedExercises).map(([group, exercises]) => (
-            <React.Fragment key={group}>
+          {exercisesByCategory.map(([category, exercises]) => (
+            <React.Fragment key={category}>
               <StickyTitle>
-                <Text variant="overline">{group}</Text>
+                <Text variant="overline">{category}</Text>
               </StickyTitle>
 
-              {exercises.map((exercise) => (
-                <ExerciseRow key={exercise}>
-                  <Text variant="body">{exercise}</Text>
+              {exercises.filter(filterByEnvironment).map((exercise) => (
+                <ExerciseRow key={exercise.id}>
+                  <ExerciseLink to={exercise.id}>{exercise.name}</ExerciseLink>
                 </ExerciseRow>
               ))}
             </React.Fragment>
@@ -67,9 +73,18 @@ const StickyTitle = styled.li`
 `;
 
 const ExerciseRow = styled.li`
-  padding: ${(p) => p.theme.spacing.normal} 0;
   margin-left: ${(p) => p.theme.spacing.normal};
   width: calc(100% - ${(p) => p.theme.spacing.normal});
+`;
+
+const ExerciseLink = styled(Link)`
+  ${(p) => p.theme.typography.body};
+  display: block;
+  padding: ${(p) => p.theme.spacing.normal} 0;
+
+  &:active {
+    opacity: 0.7;
+  }
 `;
 
 export default Catalog;

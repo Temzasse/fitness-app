@@ -5,22 +5,26 @@ import { motion, AnimateSharedLayout, AnimatePresence } from 'framer-motion';
 
 import {
   Routes,
+  Route,
   Link,
   useLocation,
   useResolvedLocation,
 } from 'react-router-dom';
 
+import { TAB_HEIGHT } from '../utils/constants';
+
 type TabType = {
   to: string;
   icon: IconType;
   iconProps?: IconBaseProps;
+  component: React.LazyExoticComponent<() => JSX.Element>;
 };
 
 interface Props {
   tabs: TabType[];
 }
 
-const TabNavigator: React.FC<Props> = ({ children, tabs }) => {
+const TabNavigator: React.FC<Props> = ({ tabs }) => {
   const location = useLocation();
   const theme = useTheme();
 
@@ -29,15 +33,21 @@ const TabNavigator: React.FC<Props> = ({ children, tabs }) => {
       <Main>
         <AnimatePresence initial={false}>
           <Routes>
-            {React.Children.map(children, (child) => (
-              <TabScreen
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <React.Suspense fallback={null}>{child}</React.Suspense>
-              </TabScreen>
+            {tabs.map((tab) => (
+              <Route
+                key={tab.to}
+                path={`${tab.to}/*`}
+                element={
+                  <TabScreen>
+                    <React.Suspense fallback={null}>
+                      {<tab.component />}
+                    </React.Suspense>
+                  </TabScreen>
+                }
+              />
             ))}
+
+            <Route path="*" element={<TabScreen>Not found</TabScreen>} />
           </Routes>
         </AnimatePresence>
       </Main>
@@ -64,12 +74,18 @@ const TabNavigator: React.FC<Props> = ({ children, tabs }) => {
 const Tab: React.FC<
   { baseColor: string; activeColor: string; location: Location } & TabType
 > = ({ to, icon, iconProps, baseColor, activeColor, location }) => {
+  const [fullTo, setFullTo] = React.useState(to);
   const resolvedLocation = useResolvedLocation(to);
-  const isActive = location.pathname === resolvedLocation.pathname;
+  const isActive = location.pathname.includes(resolvedLocation.pathname);
   const Icon = icon;
 
+  // Make sure tab link always points to the latest (potentially) nested route
+  React.useEffect(() => {
+    if (isActive) setFullTo(location.pathname);
+  }, [location, isActive]);
+
   return (
-    <TabLink to={to}>
+    <TabLink to={fullTo}>
       <Icon
         size={24}
         {...iconProps}
@@ -79,8 +95,6 @@ const Tab: React.FC<
     </TabLink>
   );
 };
-
-const TAB_HEIGHT = 54;
 
 const Wrapper = styled.div`
   position: relative;
@@ -101,7 +115,11 @@ const Tabs = styled.nav`
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.05);
 `;
 
-const TabScreen = styled(motion.div)`
+const TabScreen = styled(motion.div).attrs({
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+})`
   min-height: calc(100vh - ${TAB_HEIGHT}px);
   background-color: ${(p) => p.theme.colors.white};
   padding: ${(p) => p.theme.spacing.normal};

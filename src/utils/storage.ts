@@ -14,6 +14,14 @@ export const load = async (key: string) => {
   }
 };
 
+export const set = async (key: string, item: any) => {
+  try {
+    await storage.setItem(getKey(key), JSON.stringify(item));
+  } catch (error) {
+    console.log('> Could not set item', item, error);
+  }
+};
+
 export const append = async (key: string, item: any) => {
   try {
     const current = await load(key);
@@ -44,6 +52,7 @@ export const clear = async () => {
 
 export const createStorage = (key: string) => ({
   load: () => load(key),
+  set: (item: any) => set(key, item),
   append: (item: any) => append(key, item),
   remove: (item: any) => remove(key, item),
 });
