@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Stack, Spacer } from 'styled-layout';
-import { Text } from '../components/common';
+import { MdPlayArrow } from 'react-icons/md';
+import { Text, Fab } from '../components/common';
 import TitledNavHeader from '../navigation/TitledNavHeader';
 
 /*
@@ -12,6 +13,10 @@ Smart Workout™️
 */
 
 const Home = () => {
+  function startSmartWorkout() {
+    console.log('> Start workout');
+  }
+
   return (
     <>
       <TitledNavHeader title="Treenaa" />
@@ -28,6 +33,8 @@ const Home = () => {
           <Box w="50vw" />
         </ScrollerStack>
       </Stack>
+
+      <Fab icon={MdPlayArrow} onClick={startSmartWorkout} />
     </>
   );
 };

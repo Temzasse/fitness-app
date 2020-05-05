@@ -45,7 +45,7 @@ const WorkoutCard: React.FC<Props> = ({ workout }) => {
 const CardStack = styled(Stack)`
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: ${(p) => p.theme.shadows.medium};
+  box-shadow: ${(p) => p.theme.shadows.small};
   width: 100%;
   position: relative;
 `;

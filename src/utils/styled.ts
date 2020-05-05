@@ -35,4 +35,14 @@ export const animations = {
       transform: translateY(0%);
     }
   `,
+  scaleAndFadeIn: keyframes`
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  `,
 };
