@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { FiArrowLeft } from 'react-icons/fi';
-import { Stack } from 'styled-layout';
-import { Text } from '../components/common';
+import { BackButton } from '../components/common';
 
 interface Props {
   title: string;
@@ -16,12 +13,7 @@ const NavHeader: React.FC<Props> = ({ title }) => {
 
   return (
     <Wrapper>
-      <LeftButton to="..">
-        <Stack axis="x" spacing="small" align="center">
-          <BackIcon />
-          <Text variant="caption">Back</Text>
-        </Stack>
-      </LeftButton>
+      <LeftButton />
 
       <Title style={{ opacity }}>{title}</Title>
 
@@ -43,11 +35,9 @@ const Wrapper = styled.div`
   overflow: hidden;
 `;
 
-const BackIcon = styled(FiArrowLeft).attrs({ size: 18 })`
-  color: ${(p) => p.theme.colors.black};
-`;
+const LeftButton = styled(BackButton)`
+  flex: 1;
 
-const LeftButton = styled(Link)`
   &:active {
     opacity: 0.7;
   }
@@ -55,13 +45,10 @@ const LeftButton = styled(Link)`
 
 const Title = styled(motion.span)`
   ${(p) => p.theme.typography.body};
-  margin-left: auto !important;
-  margin-right: auto !important;
-  display: inline-block;
 `;
 
 const RightButton = styled.div`
-  margin-left: auto !important;
+  flex: 1;
 `;
 
 export default NavHeader;

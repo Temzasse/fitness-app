@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import { Text, SegmentedControl } from '../components/common';
 import { useAppState } from '../models';
 import { Exercise } from '../models/exercise';
+import { getCategoryName } from '../utils/formatting';
 
-const Catalog = () => {
+const Exercises = () => {
   const { state } = useAppState();
   const exercisesByCategory = Object.entries(state.exercises.byCategory);
   const [activeSegment, setActiveSegment] = React.useState(0);
@@ -20,7 +21,7 @@ const Catalog = () => {
 
   return (
     <Stack>
-      <Text variant="title-1">Harjoitukset</Text>
+      <Text variant="title-1">Harjoitteet</Text>
 
       <SegmentedControl
         active={activeSegment}
@@ -36,7 +37,9 @@ const Catalog = () => {
           {exercisesByCategory.map(([category, exercises]) => (
             <React.Fragment key={category}>
               <StickyTitle>
-                <Text variant="overline">{category}</Text>
+                <Text variant="overline">
+                  {getCategoryName(category as Exercise['category'])}
+                </Text>
               </StickyTitle>
 
               {exercises.filter(filterByEnvironment).map((exercise) => (
@@ -87,4 +90,4 @@ const ExerciseLink = styled(Link)`
   }
 `;
 
-export default Catalog;
+export default Exercises;

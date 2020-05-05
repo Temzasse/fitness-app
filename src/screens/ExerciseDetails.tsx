@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Stack } from 'styled-layout';
 import { Text } from '../components/common';
 import { useAppState } from '../models';
 import NavHeader from '../navigation/NavHeader';
 
-const Exercise = () => {
+const ExerciseDetails = () => {
   const params = useParams();
   const { state } = useAppState();
   const exercise = state.exercises.items[params.id];
@@ -41,4 +41,4 @@ const Box = styled.div<{ w?: string }>`
   flex: none;
 `;
 
-export default Exercise;
+export default ExerciseDetails;

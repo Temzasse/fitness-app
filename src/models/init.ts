@@ -7,11 +7,18 @@ export const onInitialize: OnInitialize = async ({ state, effects }) => {
   let exercises: Exercise[] = await effects.storage.exercises.load();
   let workouts: Workout[] = await effects.storage.workouts.load();
 
+  // --------------------------------------------------------
   // Set mock data for testing
   if (exercises.length === 0) {
     exercises = mockData.exercises;
     effects.storage.exercises.set(mockData.exercises);
   }
+
+  if (workouts.length === 0) {
+    workouts = mockData.workouts;
+    effects.storage.workouts.set(mockData.workouts);
+  }
+  // --------------------------------------------------------
 
   state.exercises.ids = exercises.map((e) => e.id);
   state.exercises.items = exercises.reduce((acc, item) => {

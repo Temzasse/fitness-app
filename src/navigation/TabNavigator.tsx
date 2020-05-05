@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconType, IconBaseProps } from 'react-icons/lib/cjs';
 import styled, { useTheme } from 'styled-components';
-import { motion, AnimateSharedLayout, AnimatePresence } from 'framer-motion';
+import { motion, AnimateSharedLayout } from 'framer-motion';
 
 import {
   Routes,
@@ -12,6 +12,8 @@ import {
 } from 'react-router-dom';
 
 import { TAB_HEIGHT } from '../utils/constants';
+import { animations } from '../utils/styled';
+import { useScrollRestoration } from '../utils/scroll';
 
 type TabType = {
   to: string;
@@ -24,6 +26,16 @@ interface Props {
   tabs: TabType[];
 }
 
+const TabRoute = (tab: TabType) => {
+  useScrollRestoration(`tab-${tab.to}`);
+
+  return (
+    <TabScreen>
+      <React.Suspense fallback={null}>{<tab.component />}</React.Suspense>
+    </TabScreen>
+  );
+};
+
 const TabNavigator: React.FC<Props> = ({ tabs }) => {
   const location = useLocation();
   const theme = useTheme();
@@ -31,25 +43,17 @@ const TabNavigator: React.FC<Props> = ({ tabs }) => {
   return (
     <Wrapper>
       <Main>
-        <AnimatePresence initial={false}>
-          <Routes>
-            {tabs.map((tab) => (
-              <Route
-                key={tab.to}
-                path={`${tab.to}/*`}
-                element={
-                  <TabScreen>
-                    <React.Suspense fallback={null}>
-                      {<tab.component />}
-                    </React.Suspense>
-                  </TabScreen>
-                }
-              />
-            ))}
+        <Routes>
+          {tabs.map((tab) => (
+            <Route
+              key={tab.to}
+              path={`${tab.to}/*`}
+              element={<TabRoute {...tab} />}
+            />
+          ))}
 
-            <Route path="*" element={<TabScreen>Not found</TabScreen>} />
-          </Routes>
-        </AnimatePresence>
+          <Route path="*" element={<TabScreen>Not found</TabScreen>} />
+        </Routes>
       </Main>
 
       <Tabs>
@@ -115,15 +119,13 @@ const Tabs = styled.nav`
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.05);
 `;
 
-const TabScreen = styled(motion.div).attrs({
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-})`
+const TabScreen = styled.div`
   min-height: calc(100vh - ${TAB_HEIGHT}px);
   background-color: ${(p) => p.theme.colors.white};
   padding: ${(p) => p.theme.spacing.normal};
   position: relative;
+  animation: ${animations.fadeIn} 200ms ease-in forwards;
+  padding-bottom: ${p => p.theme.spacing.large};
 `;
 
 const TabsStack = styled.div`

@@ -1,39 +1,52 @@
 import React from 'react';
-import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Routes, Route } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { animations } from '../utils/styled';
+import { useScrollRestoration } from '../utils/scroll';
 
 type StackItem = {
   path: string;
   component: () => JSX.Element;
+  disableAnimation?: boolean;
 };
 
 interface Props {
   stack: StackItem[];
 }
 
-const StackNavigator: React.FC<Props> = ({ stack }) => {
+const StackRoute = (item: StackItem) => {
+  const location: Location = useLocation();
+
+  useScrollRestoration(`stack-${location.pathname}`);
+
   return (
-    <AnimatePresence>
-      <Routes>
-        {stack.map((item) => (
-          <Route
-            key={item.path}
-            path={item.path}
-            element={<StackScreen>{<item.component />}</StackScreen>}
-          />
-        ))}
-      </Routes>
-    </AnimatePresence>
+    <StackScreen animate={!item.disableAnimation}>
+      {<item.component />}
+    </StackScreen>
   );
 };
 
-const StackScreen = styled(motion.div).attrs({
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-})`
+const StackNavigator: React.FC<Props> = ({ stack }) => {
+  return (
+    <Routes>
+      {stack.map((item) => (
+        <Route
+          key={item.path}
+          path={item.path}
+          element={<StackRoute {...item} />}
+        />
+      ))}
+    </Routes>
+  );
+};
+
+const StackScreen = styled.div<{ animate: boolean }>`
   background-color: ${(p) => p.theme.colors.white};
+  ${(p) =>
+    p.animate &&
+    css`
+      animation: ${animations.fadeIn} 200ms ease-in forwards;
+    `}
 `;
 
 export default StackNavigator;

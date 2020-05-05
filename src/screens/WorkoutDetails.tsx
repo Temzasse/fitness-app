@@ -1,0 +1,64 @@
+import React from 'react';
+import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+import { Stack } from 'styled-layout';
+import { motion } from 'framer-motion';
+import { Text, BackButton } from '../components/common';
+import { useAppState } from '../models';
+
+const WorkoutDetails = () => {
+  const params = useParams();
+  const { state } = useAppState();
+  const workout = state.workouts.items[params.id];
+
+  if (!workout) {
+    return <Text variant="body">Workout not found</Text>;
+  }
+
+  return (
+    <Stack>
+      <HeaderImageWrapper>
+        <HeaderImage
+          src={workout.image.urls.regular}
+          alt={workout.image.alt}
+          layoutId={`workout-image-${workout.id}`}
+        />
+        <BackButton />
+      </HeaderImageWrapper>
+
+      <Text variant="title-2">{workout.name}</Text>
+
+      <Box />
+      <Box />
+      <Box />
+      <Box />
+      <Box />
+      <Box />
+    </Stack>
+  );
+};
+
+const Box = styled.div<{ w?: string }>`
+  height: 200px;
+  width: ${(p) => p.w || '100%'};
+  background-color: ${(p) => p.theme.colors['grey-20']};
+  border-radius: 8px;
+  flex: none;
+`;
+
+const HeaderImageWrapper = styled.div`
+  margin-top: -${(p) => p.theme.spacing.normal};
+  margin-left: -${(p) => p.theme.spacing.normal};
+  margin-right: -${(p) => p.theme.spacing.normal};
+  height: 200px;
+  position: relative;
+  z-index: 1;
+`;
+
+const HeaderImage = styled(motion.img)`
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+`;
+
+export default WorkoutDetails;
