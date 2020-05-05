@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Stack } from 'styled-layout';
-import { Text } from '../common';
+import { Text } from '../components/common';
 
 const BackButton: React.FC = (props) => {
   return (

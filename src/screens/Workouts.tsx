@@ -1,25 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Stack } from 'styled-layout';
+import { Stack, Spacer } from 'styled-layout';
 import { Link } from 'react-router-dom';
 import { useAppState } from '../models';
-import { Text } from '../components/common';
 import WorkoutCard from '../components/WorkoutCard';
+import TitledNavHeader from '../navigation/TitledNavHeader';
 
 const Workouts = () => {
   const { state } = useAppState();
   const workouts = state.workouts.sorted;
 
   return (
-    <Stack spacing="large">
-      <Text variant="title-1">Harjoitukset</Text>
+    <>
+      <TitledNavHeader title="Harjoitukset" />
 
-      {workouts.map((workout) => (
-        <WorkoutLink key={workout.id} to={workout.id}>
-          <WorkoutCard workout={workout} />
-        </WorkoutLink>
-      ))}
-    </Stack>
+      <Spacer size="large" />
+
+      <Stack spacing="large">
+        {workouts.map((workout) => (
+          <WorkoutLink key={workout.id} to={workout.id}>
+            <WorkoutCard workout={workout} />
+          </WorkoutLink>
+        ))}
+      </Stack>
+    </>
   );
 };
 

@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Stack } from 'styled-layout';
+import { Stack, Spacer } from 'styled-layout';
 import { Text } from '../components/common';
+import TitledNavHeader from '../navigation/TitledNavHeader';
 
 /*
 Smart Workout™️
@@ -12,17 +13,22 @@ Smart Workout™️
 
 const Home = () => {
   return (
-    <Stack>
-      <Text variant="title-1">Treenaa</Text>
-      <Box />
-      <Text variant="title-2">Treenaa uudestaan</Text>
-      <ScrollerStack axis="x">
-        <Box w="50vw" />
-        <Box w="50vw" />
-        <Box w="50vw" />
-        <Box w="50vw" />
-      </ScrollerStack>
-    </Stack>
+    <>
+      <TitledNavHeader title="Treenaa" />
+
+      <Spacer size="medium" />
+
+      <Stack>
+        <Box />
+        <Text variant="title-2">Treenaa uudestaan</Text>
+        <ScrollerStack axis="x">
+          <Box w="50vw" />
+          <Box w="50vw" />
+          <Box w="50vw" />
+          <Box w="50vw" />
+        </ScrollerStack>
+      </Stack>
+    </>
   );
 };
 

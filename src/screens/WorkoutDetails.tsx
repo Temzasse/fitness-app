@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { Stack } from 'styled-layout';
 import { motion } from 'framer-motion';
-import { Text, BackButton } from '../components/common';
 import { useAppState } from '../models';
 import { animations } from '../utils/styled';
+import { Text } from '../components/common';
+import BackButton from '../navigation/BackButton';
 
 const WorkoutDetails = () => {
   const params = useParams();

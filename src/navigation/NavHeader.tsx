@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
-import { BackButton } from '../components/common';
+import BackButton from './BackButton';
 
 interface Props {
   title: string;
@@ -14,9 +14,7 @@ const NavHeader: React.FC<Props> = ({ title }) => {
   return (
     <Wrapper>
       <LeftButton />
-
       <Title style={{ opacity }}>{title}</Title>
-
       <RightButton />
     </Wrapper>
   );
@@ -44,7 +42,7 @@ const LeftButton = styled(BackButton)`
 `;
 
 const Title = styled(motion.span)`
-  ${(p) => p.theme.typography.body};
+  ${(p) => p.theme.typography.caption};
   display: inline-block;
 `;
 
