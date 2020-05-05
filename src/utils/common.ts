@@ -37,5 +37,13 @@ export const byNameSort = (a: { name: string }, b: { name: string }) => {
   return 0;
 };
 
-export const sleep = (ms = 500) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
+export const sleep = (ms = 500) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
+export const hashCode = (s: string) => {
+  return s
+    .split('')
+    .reduce((a, b) => ((a << 5) - a + b.charCodeAt(0)) | 0, 0)
+    .toString();
+};

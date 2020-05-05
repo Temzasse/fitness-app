@@ -45,6 +45,7 @@ const LeftButton = styled(BackButton)`
 
 const Title = styled(motion.span)`
   ${(p) => p.theme.typography.body};
+  display: inline-block;
 `;
 
 const RightButton = styled.div`

@@ -45,6 +45,7 @@ const StackScreen = styled.div<{ animate: boolean }>`
   ${(p) =>
     p.animate &&
     css`
+      opacity: 0;
       animation: ${animations.fadeIn} 200ms ease-in forwards;
     `}
 `;

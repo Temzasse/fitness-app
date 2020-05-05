@@ -123,9 +123,10 @@ const TabScreen = styled.div`
   min-height: calc(100vh - ${TAB_HEIGHT}px);
   background-color: ${(p) => p.theme.colors.white};
   padding: ${(p) => p.theme.spacing.normal};
-  position: relative;
-  animation: ${animations.fadeIn} 200ms ease-in forwards;
   padding-bottom: ${p => p.theme.spacing.large};
+  position: relative;
+  opacity: 0;
+  animation: ${animations.fadeIn} 200ms ease-in forwards;
 `;
 
 const TabsStack = styled.div`

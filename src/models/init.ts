@@ -2,6 +2,7 @@ import { OnInitialize } from 'overmind';
 import { Exercise } from './exercise';
 import { Workout } from './workout';
 import * as mockData from './mock-data';
+import { preloadPhotos } from '../utils/photos';
 
 export const onInitialize: OnInitialize = async ({ state, effects }) => {
   let exercises: Exercise[] = await effects.storage.exercises.load();
@@ -31,4 +32,7 @@ export const onInitialize: OnInitialize = async ({ state, effects }) => {
     acc[item.id] = item;
     return acc;
   }, {} as { [id: string]: Workout });
+
+  // Preload Unsplash photos for better animation experience
+  preloadPhotos(workouts.map((w) => w.image.urls.regular));
 };
