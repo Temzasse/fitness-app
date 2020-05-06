@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Stack } from 'styled-layout';
 import { motion } from 'framer-motion';
 import { MdTimer } from 'react-icons/md';
-import { Text } from '../components/common';
+import { Text, Duotone } from '../components/common';
 import { Workout } from '../models/workout';
 import { animations } from '../utils/styled';
 
@@ -14,15 +14,13 @@ interface Props {
 const WorkoutCard: React.FC<Props> = ({ workout }) => {
   return (
     <CardStack spacing="none">
-      <Image
-        src={workout.image.urls.regular}
-        alt={workout.image.alt}
-        layoutId={`workout-image-${workout.id}`}
-      />
+      <ImageWrapper layoutId={`workout-image-${workout.id}`}>
+        <Image src={workout.image.urls.regular} alt={workout.image.alt} />
+      </ImageWrapper>
 
       <DetailsStack spacing="small">
         <MetaInfoStack axis="x" justify="space-between">
-          <Text variant="overline" color="primary">
+          <Text variant="overline" color="secondary">
             {workout.sets} kierrosta
           </Text>
         </MetaInfoStack>
@@ -33,7 +31,7 @@ const WorkoutCard: React.FC<Props> = ({ workout }) => {
       {workout.duration && (
         <DurationStack axis="x" spacing="xsmall" align="center">
           <TimerIcon size={16} />
-          <Text variant="caption" color="grey-10">
+          <Text variant="caption" color="primary-dark-3">
             {workout.duration}
           </Text>
         </DurationStack>
@@ -45,16 +43,21 @@ const WorkoutCard: React.FC<Props> = ({ workout }) => {
 const CardStack = styled(Stack)`
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: ${(p) => p.theme.shadows.small};
+  box-shadow: ${(p) => p.theme.shadows.medium};
   width: 100%;
   position: relative;
+`;
+
+const ImageWrapper = styled(Duotone)`
+  width: 100%;
+  height: 25vh;
+  max-height: 300px;
 `;
 
 const Image = styled(motion.img)`
   display: block;
   width: 100%;
-  height: 25vh;
-  max-height: 300px;
+  height: 100%;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
   object-fit: cover;
@@ -75,14 +78,14 @@ const DurationStack = styled(Stack)`
   right: ${(p) => p.theme.spacing.normal};
   padding: ${(p) => p.theme.spacing.xsmall} ${(p) => p.theme.spacing.small};
   border-radius: 999px;
-  background-color: ${(p) => p.theme.colors['grey-90']};
+  background-color: ${(p) => p.theme.colors['primary-light-3']};
   opacity: 0;
   animation: ${animations.fadeIn} 200ms ease forwards;
   animation-delay: 500ms;
 `;
 
 const TimerIcon = styled(MdTimer)`
-  color: ${(p) => p.theme.colors['grey-10']};
+  color: ${(p) => p.theme.colors['primary-dark-3']};
 `;
 
 export default WorkoutCard;

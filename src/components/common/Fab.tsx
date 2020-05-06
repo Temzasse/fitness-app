@@ -27,7 +27,7 @@ const Wrapper = styled.button`
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: ${(p) => p.theme.colors.primary};
+  background-color: ${(p) => p.theme.colors.secondary};
   color: ${(p) => p.theme.colors.white};
   box-shadow: ${(p) => p.theme.shadows.large};
   transform: scale(0);
@@ -36,7 +36,7 @@ const Wrapper = styled.button`
   animation-delay: 500ms;
 
   &:active {
-    background-color: ${(p) => p.theme.colors['primary-dark-1']};
+    background-color: ${(p) => p.theme.colors['secondary-dark-1']};
   }
 `;
 

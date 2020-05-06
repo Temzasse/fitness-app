@@ -7,3 +7,4 @@ export { default as Input } from './Input';
 export { default as LabeledInput } from './LabeledInput';
 export { default as TextArea } from './TextArea';
 export { default as RadioGroup } from './RadioGroup';
+export { default as Duotone } from './Duotone';

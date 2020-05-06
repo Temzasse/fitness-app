@@ -27,6 +27,13 @@ export const theme: DefaultTheme = {
     'primary-dark-1': '#c2185b',
     'primary-dark-2': '#ad1457',
     'primary-dark-3': '#880e4f',
+    'secondary-light-3': '#C5CAE9',
+    'secondary-light-2': '#9FA8DA',
+    'secondary-light-1': '#5C6BC0',
+    'secondary': '#3949AB',
+    'secondary-dark-1': '#303F9F',
+    'secondary-dark-2': '#283593',
+    'secondary-dark-3': '#1A237E',
     divider: '#CBD5E0', // default for dividers
     'grey-10': '#F7FAFC',
     'grey-20': '#EDF2F7',

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Stack } from 'styled-layout';
 import { motion } from 'framer-motion';
 import { useAppState } from '../models';
-import { Text } from '../components/common';
+import { Text, Duotone } from '../components/common';
 import { BackButtonFab } from '../navigation/BackButton';
 
 const WorkoutDetails = () => {
@@ -18,14 +18,15 @@ const WorkoutDetails = () => {
 
   return (
     <Stack>
-      <HeaderImageWrapper>
-        <HeaderImage
-          src={workout.image.urls.regular}
-          alt={workout.image.alt}
-          layoutId={`workout-image-${workout.id}`}
-        />
+      <HeaderImageBleed>
+        <ImageWrapper layoutId={`workout-image-${workout.id}`}>
+          <HeaderImage
+            src={workout.image.urls.regular}
+            alt={workout.image.alt}
+          />
+        </ImageWrapper>
         <BackButtonFab />
-      </HeaderImageWrapper>
+      </HeaderImageBleed>
 
       <Text variant="title-2">{workout.name}</Text>
 
@@ -47,18 +48,22 @@ const Box = styled.div<{ w?: string }>`
   flex: none;
 `;
 
-const HeaderImageWrapper = styled.div`
+const HeaderImageBleed = styled.div`
   margin-top: -${(p) => p.theme.spacing.normal};
   margin-left: -${(p) => p.theme.spacing.normal};
   margin-right: -${(p) => p.theme.spacing.normal};
-  height: 200px;
   position: relative;
   z-index: 1;
 `;
 
+const ImageWrapper = styled(Duotone)`
+  width: 100vw;
+  height: 200px;
+`;
+
 const HeaderImage = styled(motion.img)`
   display: block;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   object-fit: cover;
 `;

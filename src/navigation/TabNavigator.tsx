@@ -64,7 +64,7 @@ const TabNavigator: React.FC<Props> = ({ tabs }) => {
                 {...tab}
                 key={tab.to}
                 baseColor={theme.colors.black}
-                activeColor={theme.colors.primary}
+                activeColor={theme.colors['secondary-dark-1']}
                 location={location}
               />
             ))}
@@ -158,7 +158,7 @@ const TabIndicator = styled(motion.div).attrs({ layoutId: 'tab-indicator' })`
   bottom: 8px;
   left: 8px;
   right: 8px;
-  background-color: ${(p) => p.theme.colors['primary-light-3']};
+  background-color: ${(p) => p.theme.colors['secondary-light-3']};
   border-radius: 8px;
   z-index: -1;
 `;

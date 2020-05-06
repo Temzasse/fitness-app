@@ -17,13 +17,20 @@ declare module 'styled-components' {
 
   export interface DefaultTheme {
     colors: {
+      'primary-light-3': string;
+      'primary-light-2': string;
+      'primary-light-1': string;
       primary: string;
       'primary-dark-1': string;
       'primary-dark-2': string;
       'primary-dark-3': string;
-      'primary-light-1': string;
-      'primary-light-2': string;
-      'primary-light-3': string;
+      'secondary-light-3': string;
+      'secondary-light-2': string;
+      'secondary-light-1': string;
+      secondary: string;
+      'secondary-dark-1': string;
+      'secondary-dark-2': string;
+      'secondary-dark-3': string;
       divider: string;
       'grey-10': string;
       'grey-20': string;
