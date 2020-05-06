@@ -12,7 +12,7 @@ const Input = styled.input<Props>`
   color: ${(p) => p.theme.colors.black};
   padding: ${(p) => p.theme.spacing.small};
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 8px;
   width: 100%;
 
   &::placeholder {

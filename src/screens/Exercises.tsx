@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Stack } from 'styled-layout';
-import { Link } from 'react-router-dom';
-import { Text, SegmentedControl } from '../components/common';
+import { Link, useNavigate } from 'react-router-dom';
+import { MdAdd } from 'react-icons/md';
+import { Text, SegmentedControl, Fab } from '../components/common';
 import { useAppState } from '../models';
 import { Exercise } from '../models/exercise';
 import { getCategoryName } from '../utils/formatting';
 
 const Exercises = () => {
+  const navigate = useNavigate();
   const { state } = useAppState();
   const exercisesByCategory = Object.entries(state.exercises.byCategory);
   const [activeSegment, setActiveSegment] = React.useState(0);
@@ -20,38 +22,44 @@ const Exercises = () => {
   }
 
   return (
-    <Stack>
-      <Text variant="title-1">Harjoitteet</Text>
+    <>
+      <Stack>
+        <Text variant="title-1">Harjoitteet</Text>
 
-      <SegmentedControl
-        active={activeSegment}
-        segments={[
-          { label: 'Kaikki', onClick: () => setActiveSegment(0) },
-          { label: 'Sisä', onClick: () => setActiveSegment(1) },
-          { label: 'Ulko', onClick: () => setActiveSegment(2) },
-        ]}
-      />
+        <SegmentedControl
+          active={activeSegment}
+          segments={[
+            { label: 'Kaikki', onClick: () => setActiveSegment(0) },
+            { label: 'Sisä', onClick: () => setActiveSegment(1) },
+            { label: 'Ulko', onClick: () => setActiveSegment(2) },
+          ]}
+        />
 
-      <ExerciseList>
-        <Stack as="ul" dividers="grey-20" spacing="none">
-          {exercisesByCategory.map(([category, exercises]) => (
-            <React.Fragment key={category}>
-              <StickyTitle>
-                <Text variant="overline">
-                  {getCategoryName(category as Exercise['category'])}
-                </Text>
-              </StickyTitle>
+        <ExerciseList>
+          <Stack as="ul" dividers="grey-20" spacing="none">
+            {exercisesByCategory.map(([category, exercises]) => (
+              <React.Fragment key={category}>
+                <StickyTitle>
+                  <Text variant="overline">
+                    {getCategoryName(category as Exercise['category'])}
+                  </Text>
+                </StickyTitle>
 
-              {exercises.filter(filterByEnvironment).map((exercise) => (
-                <ExerciseRow key={exercise.id}>
-                  <ExerciseLink to={exercise.id}>{exercise.name}</ExerciseLink>
-                </ExerciseRow>
-              ))}
-            </React.Fragment>
-          ))}
-        </Stack>
-      </ExerciseList>
-    </Stack>
+                {exercises.filter(filterByEnvironment).map((exercise) => (
+                  <ExerciseRow key={exercise.id}>
+                    <ExerciseLink to={exercise.id}>
+                      {exercise.name}
+                    </ExerciseLink>
+                  </ExerciseRow>
+                ))}
+              </React.Fragment>
+            ))}
+          </Stack>
+        </ExerciseList>
+      </Stack>
+
+      <Fab icon={MdAdd} onClick={() => navigate('create')} />
+    </>
   );
 };
 

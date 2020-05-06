@@ -28,12 +28,14 @@ button {
 
 a,
 button,
-input {
+input,
+textarea,
+label {
   -webkit-tap-highlight-color: transparent;
   font-family: 'Inter', sans-serif;
 }
 
-input {
+input, textarea {
   -webkit-appearance: none;
   outline: none;
   border: none;
