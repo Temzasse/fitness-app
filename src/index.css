@@ -23,11 +23,25 @@ button {
   border: none;
   background: none;
   outline: none;
+  padding: 0;
 }
 
 a,
-button {
+button,
+input {
   -webkit-tap-highlight-color: transparent;
+  font-family: 'Inter', sans-serif;
+}
+
+input {
+  -webkit-appearance: none;
+  outline: none;
+  border: none;
+  background: transparent;
+}
+
+label {
+  margin: 0;
 }
 
 a {

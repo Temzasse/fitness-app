@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Stack, Spacer } from 'styled-layout';
 import { MdPlayArrow } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import { Text, Fab } from '../components/common';
 import TitledNavHeader from '../navigation/TitledNavHeader';
 
@@ -13,9 +14,7 @@ Smart Workout™️
 */
 
 const Home = () => {
-  function startSmartWorkout() {
-    console.log('> Start workout');
-  }
+  const navigate = useNavigate();
 
   return (
     <>
@@ -34,7 +33,7 @@ const Home = () => {
         </ScrollerStack>
       </Stack>
 
-      <Fab icon={MdPlayArrow} onClick={startSmartWorkout} />
+      <Fab icon={MdPlayArrow} onClick={() => navigate('smart-workout')} />
     </>
   );
 };

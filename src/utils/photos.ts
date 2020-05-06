@@ -21,7 +21,7 @@ const photosAPI = axios.create({
 
 export const getRandomPhotos = async () => {
   const res = await photosAPI.get(
-    '/photos/random?query=sport&orientation=landscape&count=10'
+    '/photos/random?query=workout&orientation=landscape&count=30'
   );
 
   const photos: Photo[] = (res.data || []).map((photo: any) => ({

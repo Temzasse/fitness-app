@@ -21,7 +21,8 @@ const Fab: React.FC<Props> = ({ icon, onClick, ...rest }) => {
 
 const Wrapper = styled.button`
   position: fixed;
-  bottom: ${TAB_HEIGHT + 8}px;
+  bottom: ${TAB_HEIGHT + 8}px; /* Fallback */
+  bottom: calc(${TAB_HEIGHT + 8}px + env(safe-area-inset-bottom));
   right: 8px;
   width: 56px;
   height: 56px;

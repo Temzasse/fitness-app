@@ -21,13 +21,11 @@ type ExercisesByCategory = {
 };
 
 type State = {
-  ids: string[];
   items: { [id: string]: Exercise };
   byCategory: Derive<State, ExercisesByCategory>;
 };
 
 export const state: State = {
-  ids: [],
   items: {},
   byCategory: (state) => {
     return Object.values(state.items).reduce((acc, val) => {

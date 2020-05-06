@@ -21,13 +21,11 @@ export const onInitialize: OnInitialize = async ({ state, effects }) => {
   }
   // --------------------------------------------------------
 
-  state.exercises.ids = exercises.map((e) => e.id);
   state.exercises.items = exercises.reduce((acc, item) => {
     acc[item.id] = item;
     return acc;
   }, {} as { [id: string]: Exercise });
 
-  state.workouts.ids = workouts.map((e) => e.id);
   state.workouts.items = workouts.reduce((acc, item) => {
     acc[item.id] = item;
     return acc;

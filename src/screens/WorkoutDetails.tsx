@@ -4,9 +4,8 @@ import { useParams } from 'react-router-dom';
 import { Stack } from 'styled-layout';
 import { motion } from 'framer-motion';
 import { useAppState } from '../models';
-import { animations } from '../utils/styled';
 import { Text } from '../components/common';
-import BackButton from '../navigation/BackButton';
+import { BackButtonFab } from '../navigation/BackButton';
 
 const WorkoutDetails = () => {
   const params = useParams();
@@ -25,9 +24,7 @@ const WorkoutDetails = () => {
           alt={workout.image.alt}
           layoutId={`workout-image-${workout.id}`}
         />
-        <BackButtonWrapper>
-          <BackButton />
-        </BackButtonWrapper>
+        <BackButtonFab />
       </HeaderImageWrapper>
 
       <Text variant="title-2">{workout.name}</Text>
@@ -64,21 +61,6 @@ const HeaderImage = styled(motion.img)`
   width: 100vw;
   height: 100%;
   object-fit: cover;
-`;
-
-const BackButtonWrapper = styled.div`
-  position: absolute;
-  top: ${(p) => p.theme.spacing.normal};
-  left: ${(p) => p.theme.spacing.normal};
-  padding: ${(p) => p.theme.spacing.xsmall};
-  padding-right: ${(p) => p.theme.spacing.small};
-  border-radius: 999px;
-  background-color: ${(p) => p.theme.colors.white};
-  box-shadow: ${(p) => p.theme.shadows.medium};
-  opacity: 0;
-  transform: translateY(-100%);
-  animation: ${animations.slideDownAndFadeIn} 200ms ease forwards;
-  animation-delay: 500ms;
 `;
 
 export default WorkoutDetails;

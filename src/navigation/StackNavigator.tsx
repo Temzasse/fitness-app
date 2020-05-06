@@ -8,6 +8,7 @@ type StackItem = {
   path: string;
   component: () => JSX.Element;
   disableAnimation?: boolean;
+  disableScrollRestoration?: boolean;
 };
 
 interface Props {
@@ -17,7 +18,10 @@ interface Props {
 const StackRoute = (item: StackItem) => {
   const location: Location = useLocation();
 
-  useScrollRestoration(`stack-${location.pathname}`);
+  useScrollRestoration(
+    `stack-${location.pathname}`,
+    !!item.disableScrollRestoration
+  );
 
   return (
     <StackScreen animate={!item.disableAnimation}>

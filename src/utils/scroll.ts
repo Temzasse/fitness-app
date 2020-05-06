@@ -16,26 +16,37 @@ export function restoreScroll(idSuffix: string | number) {
   }
 }
 
-export function useScrollRestoration(idSuffix: string | number) {
+export function clearPersistedScroll(idSuffix: string | number) {
+  const id = getId(idSuffix);
+  sessionStorage.removeItem(id);
+}
+
+export function useScrollRestoration(
+  idSuffix: string | number,
+  disabled = false
+) {
   const id = getId(idSuffix);
 
   React.useLayoutEffect(() => {
-    restoreScroll(idSuffix);
-  }, [idSuffix]);
+    if (!disabled) restoreScroll(idSuffix);
+  }, [idSuffix, disabled]);
 
   React.useEffect(() => {
-    const throttled = throttle((scroll: { x: number; y: number }) => {
-      sessionStorage.setItem(id, JSON.stringify(scroll));
-    }, 100);
+    if (!disabled) {
+      const throttled = throttle((scroll: { x: number; y: number }) => {
+        sessionStorage.setItem(id, JSON.stringify(scroll));
+      }, 100);
 
-    const handleScroll = () => {
-      throttled({ x: window.scrollX, y: window.scrollY });
-    };
+      const handleScroll = () => {
+        throttled({ x: window.scrollX, y: window.scrollY });
+      };
 
-    window.addEventListener('scroll', handleScroll);
+      window.addEventListener('scroll', handleScroll);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [id]);
+      return () => {
+        throttled.cancel();
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, [id, disabled]);
 }
