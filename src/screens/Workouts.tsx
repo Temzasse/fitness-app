@@ -4,9 +4,10 @@ import { Stack, Spacer } from 'styled-layout';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 import { useAppState } from '../models';
+import { Fab } from '../components/common';
 import WorkoutCard from '../components/WorkoutCard';
 import TitledNavHeader from '../navigation/TitledNavHeader';
-import { Fab } from '../components/common';
+import { useScrollIntoView } from '../utils/scroll';
 
 const Workouts = () => {
   const { state: navState } = useLocation();
@@ -15,16 +16,7 @@ const Workouts = () => {
   const workouts = state.workouts.sorted;
 
   // Automatically scroll newly added workout into view
-  React.useEffect(() => {
-    if (navState && navState.scrollIntoView) {
-      const el = document.getElementById(navState.scrollIntoView);
-      if (el) {
-        setTimeout(() => {
-          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 200);
-      }
-    }
-  }, [navState]);
+  useScrollIntoView(navState && navState.scrollIntoView);
 
   return (
     <>

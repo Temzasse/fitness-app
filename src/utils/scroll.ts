@@ -50,3 +50,16 @@ export function useScrollRestoration(
     }
   }, [id, disabled]);
 }
+
+export const useScrollIntoView = (id?: string) => {
+  React.useEffect(() => {
+    if (id) {
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 200);
+      }
+    }
+  }, [id]);
+};
