@@ -59,6 +59,8 @@ const PhotoCell = styled.button<{ index: number }>`
   height: 100px;
   animation: ${animations.fadeIn} 100ms ease forwards;
   animation-delay: ${(p) => p.index * 100}ms;
+  border-radius: 4px;
+  overflow: hidden;
 
   &:active {
     filter: brightness(0.7);
@@ -74,7 +76,6 @@ const PhotoImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 2px;
 `;
 
 export default PhotoSelector;
