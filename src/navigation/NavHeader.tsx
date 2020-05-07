@@ -26,6 +26,7 @@ const Wrapper = styled.div`
   width: 100%;
   margin-top: -${(p) => p.theme.spacing.normal};
   padding: ${(p) => p.theme.spacing.normal} 0;
+  padding-top: max(${(p) => p.theme.spacing.normal}, env(safe-area-inset-top));
   z-index: 999;
   background-color: ${(p) => p.theme.colors.white};
   display: flex;

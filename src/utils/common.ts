@@ -1,3 +1,19 @@
+import React from 'react';
+
+// Hooks ------------------------------------------------
+
+export const usePrevious = <T>(state: T): T | undefined => {
+  const ref = React.useRef<T>();
+
+  React.useEffect(() => {
+    ref.current = state;
+  });
+
+  return ref.current;
+};
+
+// Other ------------------------------------------------
+
 export const guid = () => {
   function s4() {
     return Math.floor((1 + Math.random()) * 0x10000)
@@ -47,3 +63,7 @@ export const hashCode = (s: string) => {
     .reduce((a, b) => ((a << 5) - a + b.charCodeAt(0)) | 0, 0)
     .toString();
 };
+
+export const clamp = (value: number, min: number, max: number) =>
+  Math.max(min, Math.min(max, value));
+

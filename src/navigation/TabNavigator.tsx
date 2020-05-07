@@ -123,6 +123,7 @@ const TabScreen = styled.div`
   min-height: calc(100vh - ${TAB_HEIGHT}px);
   background-color: ${(p) => p.theme.colors.white};
   padding: ${(p) => p.theme.spacing.normal};
+  padding-top: max(${(p) => p.theme.spacing.normal}, env(safe-area-inset-top));
   padding-bottom: ${p => p.theme.spacing.large};
   position: relative;
   opacity: 0;

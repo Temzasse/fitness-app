@@ -1,49 +1,57 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Stack } from 'styled-layout';
-import { useNavigate } from 'react-router-dom';
 import { Photo, getRandomPhotos } from '../utils/photos';
 import { animations } from '../utils/styled';
-import { Text } from '../components/common';
-import NavHeader from '../navigation/NavHeader';
+import { Text, Duotone } from '../components/common';
 import { useAppState } from '../models';
+import { useBottomSheet } from '../components/BottomSheet';
 
 const PhotoSelector = () => {
-  const navigate = useNavigate();
+  const bottomSheet = useBottomSheet();
   const { actions } = useAppState();
   const [photos, setPhotos] = React.useState<Photo[]>([]);
 
   function handlePhotoClick(photo: Photo) {
     actions.workouts.updateNewWorkout({ image: photo });
-    navigate('..');
+    bottomSheet.close();
   }
 
-  React.useEffect(() => {
-    getRandomPhotos()
-      .then(setPhotos)
-      .catch((error) => console.log('> Failed to fetch photos', error));
-  }, []);
+  // React.useEffect(() => {
+  //   getRandomPhotos()
+  //     .then(setPhotos)
+  //     .catch((error) => console.log('> Failed to fetch photos', error));
+  // }, []);
 
   return (
-    <Stack>
-      <NavHeader title="Choose photo" />
+    <Wrapper>
+      <Stack>
+        <Text variant="title-2">Valitse kuva</Text>
 
-      <Text variant="title-2">Choose photo</Text>
-
-      <Stack axis="x" spacing="xsmall" fluid>
-        {photos.map((photo, index) => (
-          <PhotoCell
-            key={photo.id}
-            index={index}
-            onClick={() => handlePhotoClick(photo)}
-          >
-            <PhotoImg src={photo.urls.thumb} />
-          </PhotoCell>
-        ))}
+        <Stack axis="x" spacing="xsmall" fluid>
+          {photos.map((photo, index) => (
+            <PhotoCell
+              key={photo.id}
+              index={index}
+              onClick={() => handlePhotoClick(photo)}
+            >
+              <PhotoWrapper>
+                <PhotoImg src={photo.urls.thumb} />
+              </PhotoWrapper>
+            </PhotoCell>
+          ))}
+        </Stack>
       </Stack>
-    </Stack>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  height: 100%;
+  width: 100%;
+  padding: ${(p) => p.theme.spacing.normal};
+  overflow: auto;
+`;
 
 const PhotoCell = styled.button<{ index: number }>`
   opacity: 0;
@@ -55,6 +63,11 @@ const PhotoCell = styled.button<{ index: number }>`
   &:active {
     filter: brightness(0.7);
   }
+`;
+
+const PhotoWrapper = styled(Duotone)`
+  width: 100%;
+  height: 100%;
 `;
 
 const PhotoImg = styled.img`

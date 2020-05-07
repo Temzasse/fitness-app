@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 
 const Duotone = styled(motion.div)`
   position: relative;
+  width: 100%;
+  height: 100%;
 
   &::before {
     opacity: 0.7;

@@ -30,6 +30,7 @@ const Wrapper = styled(motion.div)`
   left: 0px;
   right: 0px;
   padding: ${(p) => p.theme.spacing.normal};
+  padding-top: max(${(p) => p.theme.spacing.normal}, env(safe-area-inset-top));
   z-index: 999;
   background-color: ${(p) => p.theme.colors.white};
   display: flex;

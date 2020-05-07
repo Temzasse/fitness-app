@@ -41,11 +41,13 @@ export const state: State = {
 };
 
 const updateNewWorkout: Action<EditableWorkout> = ({ state }, updates) => {
-  state.workouts.new = { ...state.workouts.new, ...updates };
   state.workouts.formState = 'editing';
+  state.workouts.new = { ...state.workouts.new, ...updates };
 };
 
 const toggleExerciseInNewWorkout: Action<string> = ({ state }, id) => {
+  state.workouts.formState = 'editing';
+
   if (!state.workouts.new.exercises) {
     state.workouts.new.exercises = [id];
   } else {
@@ -57,12 +59,11 @@ const toggleExerciseInNewWorkout: Action<string> = ({ state }, id) => {
       state.workouts.new.exercises.push(id);
     }
   }
-  state.workouts.formState = 'editing';
 };
 
 const clearNewWorkout: Action = ({ state }) => {
-  state.workouts.new = {};
   state.workouts.formState = 'initial';
+  state.workouts.new = {};
 };
 
 const saveNewWorkout: AsyncAction<any> = async (

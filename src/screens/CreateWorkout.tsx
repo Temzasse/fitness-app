@@ -3,30 +3,46 @@ import styled from 'styled-components';
 import { Stack, Spacer } from 'styled-layout';
 import { FiImage, FiRepeat, FiChevronRight } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
-import { Text, Button, Input, LabeledInput } from '../components/common';
+import { MdTimer, MdDirectionsRun } from 'react-icons/md';
 import { BackButtonFab } from '../navigation/BackButton';
 import { useAppState } from '../models';
-import { MdTimer, MdDirectionsRun } from 'react-icons/md';
+import { useBottomSheet } from '../components/BottomSheet';
+import PhotoSelector from './PhotoSelector';
+
+import {
+  Text,
+  Button,
+  Input,
+  LabeledInput,
+  Duotone,
+} from '../components/common';
 
 const CreateWorkout = () => {
   const navigate = useNavigate();
+  const bottomSheet = useBottomSheet();
   const { state, actions } = useAppState();
   const { formState, new: workout, isNewValid: isValid } = state.workouts;
   const isSaving = formState === 'saving';
   const canSave = isValid && formState === 'editing';
+
+  function openPhotoSelector() {
+    bottomSheet.open(<PhotoSelector />);
+  }
 
   return (
     <>
       <BackButtonFab onClick={actions.workouts.clearNewWorkout} />
 
       <Stack>
-        <HeaderImageLink to="select-photo">
+        <HeaderImageButton onClick={openPhotoSelector}>
           <HeaderImageWrapper>
             {workout.image ? (
-              <HeaderImage
-                src={workout.image.urls.regular}
-                alt={workout.image.alt}
-              />
+              <Duotone>
+                <HeaderImage
+                  src={workout.image.urls.regular}
+                  alt={workout.image.alt}
+                />
+              </Duotone>
             ) : (
               <AddImageStack spacing="small" align="center" justify="center">
                 <FiImage size={40} />
@@ -36,7 +52,7 @@ const CreateWorkout = () => {
               </AddImageStack>
             )}
           </HeaderImageWrapper>
-        </HeaderImageLink>
+        </HeaderImageButton>
 
         <Input
           placeholder="Syötä nimi"
@@ -104,7 +120,7 @@ const CreateWorkout = () => {
   );
 };
 
-const HeaderImageLink = styled(Link)`
+const HeaderImageButton = styled.button`
   margin-top: -${(p) => p.theme.spacing.normal};
   margin-left: -${(p) => p.theme.spacing.normal};
   margin-right: -${(p) => p.theme.spacing.normal};
