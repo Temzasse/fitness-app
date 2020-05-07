@@ -8,6 +8,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
   background-color: #fff;
 }
 
@@ -31,7 +33,6 @@ button,
 input,
 textarea,
 label {
-  -webkit-tap-highlight-color: transparent;
   font-family: 'Inter', sans-serif;
 }
 
