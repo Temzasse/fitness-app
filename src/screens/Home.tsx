@@ -31,6 +31,13 @@ const Home = () => {
           <Box w="50vw" />
           <Box w="50vw" />
         </ScrollerStack>
+
+        <Box />
+        <Box />
+        <Box />
+        <Box />
+        <Box />
+        <Box />
       </Stack>
 
       <Fab icon={MdPlayArrow} onClick={() => navigate('smart-workout')} />

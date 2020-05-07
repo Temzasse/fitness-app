@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Stack } from 'styled-layout';
+import { Stack, Spacer } from 'styled-layout';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdAdd } from 'react-icons/md';
 import { Text, SegmentedControl, Fab } from '../components/common';
 import { useAppState } from '../models';
 import { Exercise } from '../models/exercise';
 import { getCategoryName } from '../utils/formatting';
+import TitledNavHeader from '../navigation/TitledNavHeader';
 
 const Exercises = () => {
   const navigate = useNavigate();
@@ -23,9 +24,11 @@ const Exercises = () => {
 
   return (
     <>
-      <Stack>
-        <Text variant="title-1">Harjoitteet</Text>
+      <TitledNavHeader title="Harjoitteet" />
 
+      <Spacer size="medium" />
+
+      <Stack>
         <SegmentedControl
           active={activeSegment}
           segments={[
@@ -56,12 +59,29 @@ const Exercises = () => {
             ))}
           </Stack>
         </ExerciseList>
+
+        <Box />
+        <Box />
+        <Box />
+        <Box />
+        <Box />
+        <Box />
+        <Box />
+        <Box />
       </Stack>
 
       <Fab icon={MdAdd} onClick={() => navigate('create')} />
     </>
   );
 };
+
+const Box = styled.div<{ w?: string }>`
+  height: 200px;
+  width: ${(p) => p.w || '100%'};
+  background-color: ${(p) => p.theme.colors['grey-20']};
+  border-radius: 8px;
+  flex: none;
+`;
 
 // NOTE: for some reason the as="ul" prop breaks the Stack component
 // so we need to apply the styles via this extra div
@@ -76,7 +96,8 @@ const ExerciseList = styled.div`
 
 const StickyTitle = styled.li`
   position: sticky;
-  top: 0px;
+  top: 50px;
+  top: calc(50px + env(safe-area-inset-top));
   width: 100%;
   z-index: 1;
   padding: ${(p) => p.theme.spacing.xsmall} ${(p) => p.theme.spacing.normal};

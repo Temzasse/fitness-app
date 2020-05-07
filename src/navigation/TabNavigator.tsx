@@ -113,7 +113,7 @@ const Tab: React.FC<
 
 const Wrapper = styled.div`
   position: relative;
-  background-color: ${(p) => p.theme.colors['grey-10']};
+  background-color: ${(p) => p.theme.colors.white};
 `;
 
 const Main = styled.main`
