@@ -7,6 +7,7 @@ import {
   Routes,
   Route,
   Link,
+  useNavigate,
   useLocation,
   useResolvedLocation,
 } from 'react-router-dom';
@@ -36,6 +37,16 @@ const TabRoute = (tab: TabType) => {
   );
 };
 
+const RedirectToHome = () => {
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    navigate('home');
+  }, []); // eslint-disable-line
+
+  return null;
+};
+
 const TabNavigator: React.FC<Props> = ({ tabs }) => {
   const location = useLocation();
   const theme = useTheme();
@@ -52,7 +63,7 @@ const TabNavigator: React.FC<Props> = ({ tabs }) => {
             />
           ))}
 
-          <Route path="*" element={<TabScreen>Not found</TabScreen>} />
+          <Route path="*" element={<RedirectToHome />} />
         </Routes>
       </Main>
 
@@ -124,7 +135,7 @@ const TabScreen = styled.div`
   background-color: ${(p) => p.theme.colors.white};
   padding: ${(p) => p.theme.spacing.normal};
   padding-top: max(${(p) => p.theme.spacing.normal}, env(safe-area-inset-top));
-  padding-bottom: ${p => p.theme.spacing.large};
+  padding-bottom: ${(p) => p.theme.spacing.large};
   position: relative;
   opacity: 0;
   animation: ${animations.fadeIn} 200ms ease-in forwards;
