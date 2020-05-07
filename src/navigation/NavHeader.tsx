@@ -13,25 +13,50 @@ const NavHeader: React.FC<Props> = ({ title }) => {
 
   return (
     <Wrapper>
-      <LeftButton />
-      <Title style={{ opacity }}>{title}</Title>
-      <RightButton />
+      <Shadow style={{ opacity }} />
+      <Content>
+        <LeftButton />
+        <Title style={{ opacity }}>{title}</Title>
+        <RightButton />
+      </Content>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
+  z-index: 999;
   position: sticky;
   top: 0px;
-  width: 100%;
+  width: 100vw;
+  margin-left: -${(p) => p.theme.spacing.normal};
+  margin-right: -${(p) => p.theme.spacing.normal};
   margin-top: -${(p) => p.theme.spacing.normal};
-  padding: ${(p) => p.theme.spacing.normal} 0;
-  padding-top: max(${(p) => p.theme.spacing.normal}, env(safe-area-inset-top));
-  z-index: 999;
-  background-color: ${(p) => p.theme.colors.white};
+  height: 50px;
+  height: calc(50px + env(safe-area-inset-top));
+`;
+
+const Content = styled.div`
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   display: flex;
   align-items: center;
-  overflow: hidden;
+  padding: 0 ${(p) => p.theme.spacing.normal};
+  padding-top: env(safe-area-inset-top);
+  background-color: ${(p) => p.theme.colors.white};
+`;
+
+const Shadow = styled(motion.div)`
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  box-shadow: ${(p) => p.theme.shadows.small};
 `;
 
 const LeftButton = styled(BackButton)`

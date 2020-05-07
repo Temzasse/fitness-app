@@ -29,9 +29,9 @@ const Wrapper = styled(motion.div)`
   top: 0px;
   left: 0px;
   right: 0px;
-  padding: 0 ${(p) => p.theme.spacing.normal};
   height: 50px;
   height: calc(50px + env(safe-area-inset-top));
+  padding: 0 ${(p) => p.theme.spacing.normal};
   padding-top: env(safe-area-inset-top);
   z-index: 999;
   background-color: ${(p) => p.theme.colors.white};
