@@ -17,11 +17,11 @@ const PhotoSelector = () => {
     bottomSheet.close();
   }
 
-  // React.useEffect(() => {
-  //   getRandomPhotos()
-  //     .then(setPhotos)
-  //     .catch((error) => console.log('> Failed to fetch photos', error));
-  // }, []);
+  React.useEffect(() => {
+    getRandomPhotos()
+      .then(setPhotos)
+      .catch((error) => console.log('> Failed to fetch photos', error));
+  }, []);
 
   return (
     <Wrapper>
