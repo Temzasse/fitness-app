@@ -79,7 +79,7 @@ const BottomSheet = ({ rootSelector }: { rootSelector: string }) => {
             key="sheet"
             ref={constraintsRef}
             initial={{ y: CLOSE_Y }}
-            animate={{ y: OPEN_Y }}
+            animate={{ y: OPEN_Y, transition: { type: 'tween' } }}
             exit={{ y: CLOSE_Y }}
             style={{ y: sheetY }}
           >
@@ -204,12 +204,10 @@ function applyGlobalStyles(rootSelector: string) {
   scrollLock.enable();
 
   body.style.backgroundColor = '#000';
-  root.style.position = 'absolute';
   root.style.overflow = 'hidden';
-  root.style.top = 'env(safe-area-inset-top)';
   root.style.willChange = 'transform';
   root.style.transition = 'transform 200ms linear';
-  root.style.transform = 'scale(0.95)';
+  root.style.transform = 'translateY(env(safe-area-inset-top)) scale(0.95)';
   root.style.borderRadius = '8px';
 }
 
@@ -218,9 +216,7 @@ function cleanupGlobalStyles(rootSelector: string) {
   const root = document.querySelector(rootSelector) as HTMLDivElement;
 
   function onTransitionEnd() {
-    root.style.position = '';
     root.style.overflow = '';
-    root.style.top = '';
     root.style.willChange = '';
     root.style.transition = '';
     body.style.backgroundColor = '';
