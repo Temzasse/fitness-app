@@ -17,26 +17,28 @@ const WorkoutDetails = () => {
   }
 
   return (
-    <Stack>
-      <HeaderImageBleed>
-        <ImageWrapper layoutId={`workout-image-${workout.id}`}>
-          <HeaderImage
-            src={workout.image.urls.regular}
-            alt={workout.image.alt}
-          />
-        </ImageWrapper>
-        <BackButtonFab />
-      </HeaderImageBleed>
+    <Wrapper>
+      <Stack>
+        <HeaderImageBleed>
+          <ImageWrapper layoutId={`workout-image-${workout.id}`}>
+            <HeaderImage
+              src={workout.image.urls.regular}
+              alt={workout.image.alt}
+            />
+          </ImageWrapper>
+          <BackButtonFab />
+        </HeaderImageBleed>
 
-      <Text variant="title-2">{workout.name}</Text>
+        <Text variant="title-2">{workout.name}</Text>
 
-      <Box />
-      <Box />
-      <Box />
-      <Box />
-      <Box />
-      <Box />
-    </Stack>
+        <Box />
+        <Box />
+        <Box />
+        <Box />
+        <Box />
+        <Box />
+      </Stack>
+    </Wrapper>
   );
 };
 
@@ -46,6 +48,11 @@ const Box = styled.div<{ w?: string }>`
   background-color: ${(p) => p.theme.colors['grey-20']};
   border-radius: 8px;
   flex: none;
+`;
+
+const Wrapper = styled.div`
+  margin-top: calc(env(safe-area-inset-top) * -1);
+  padding: ${p => p.theme.spacing.normal} 0;
 `;
 
 const HeaderImageBleed = styled.div`
