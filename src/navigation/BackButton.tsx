@@ -33,7 +33,10 @@ const BackButtonFabWrapper = styled.div`
   z-index: 999;
   position: absolute;
   top: ${(p) => p.theme.spacing.normal};
-  top: max(${(p) => p.theme.spacing.normal}, env(safe-area-inset-top));
+  top: max(
+    ${(p) => p.theme.spacing.normal},
+    calc(env(safe-area-inset-top) + ${(p) => p.theme.spacing.normal})
+  );
   left: ${(p) => p.theme.spacing.normal};
   padding: ${(p) => p.theme.spacing.xsmall};
   padding-right: ${(p) => p.theme.spacing.small};

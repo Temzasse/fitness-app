@@ -1,4 +1,4 @@
-import { AsyncAction, Action, Derive } from 'overmind';
+import { AsyncAction, Action, derived } from 'overmind';
 import { guid, sleep } from '../utils/common';
 
 type ExerciseEnv = 'indoor' | 'outdoor' | 'any';
@@ -29,10 +29,10 @@ type EditableExercise = Omit<Exercise, 'id'>;
 
 type State = {
   items: { [id: string]: Exercise };
-  byCategory: Derive<State, ExercisesByCategory>;
+  byCategory: ExercisesByCategory;
   formState: 'initial' | 'editing' | 'saving' | 'saved' | 'failed';
   new: EditableExercise;
-  isNewValid: Derive<State, boolean>;
+  isNewValid: boolean;
 };
 
 const initialExercise: EditableExercise = {
@@ -46,7 +46,7 @@ const initialExercise: EditableExercise = {
 
 export const state: State = {
   items: {},
-  byCategory: (state) => {
+  byCategory: derived((state: State) => {
     return Object.values(state.items).reduce((acc, val) => {
       if (!acc[val.category]) {
         acc[val.category] = [val];
@@ -55,18 +55,23 @@ export const state: State = {
       }
       return acc;
     }, {} as ExercisesByCategory);
-  },
+  }),
   formState: 'initial',
   new: initialExercise,
-  isNewValid: (state) =>
-    !!state.new.name &&
-    !!state.new.description &&
-    !!Object.values(state.new.levelDescriptions)
-      .map((d) => !!d)
-      .filter(Boolean).length,
+  isNewValid: derived(
+    (state: State) =>
+      !!state.new.name &&
+      !!state.new.description &&
+      !!Object.values(state.new.levelDescriptions)
+        .map((d) => !!d)
+        .filter(Boolean).length
+  ),
 };
 
-const updateNewExercise: Action<Partial<EditableExercise>> = ({ state }, updates) => {
+const updateNewExercise: Action<Partial<EditableExercise>> = (
+  { state },
+  updates
+) => {
   state.exercises.new = { ...state.exercises.new, ...updates };
   state.exercises.formState = 'editing';
 };

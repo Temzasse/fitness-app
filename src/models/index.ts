@@ -31,7 +31,13 @@ export const config = {
 };
 
 declare module 'overmind' {
-  interface Config extends IConfig<typeof config> {}
+  interface Config
+    extends IConfig<{
+      state: typeof config.state;
+      actions: typeof config.actions;
+      effects: typeof config.effects;
+      onInitialize: typeof config.onInitialize;
+    }> {}
 }
 
 export const useAppState = createHook<typeof config>();

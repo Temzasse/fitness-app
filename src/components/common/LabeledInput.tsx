@@ -45,8 +45,8 @@ const Wrapper = styled.label`
   border-bottom: 1px solid;
   border-color: ${(p) => p.theme.colors['grey-20']};
   padding: ${(p) => p.theme.spacing.small} ${(p) => p.theme.spacing.normal};
-  margin-left: -${(p) => p.theme.spacing.normal};
-  margin-right: -${(p) => p.theme.spacing.normal};
+  margin-left: -${(p) => p.theme.spacing.normal} !important;
+  margin-right: -${(p) => p.theme.spacing.normal} !important;
   display: flex;
   align-items: center;
   width: 100vw;

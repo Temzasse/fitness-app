@@ -1,4 +1,4 @@
-import { AsyncAction, Action, Derive } from 'overmind';
+import { AsyncAction, Action, derived } from 'overmind';
 import { Exercise } from './exercise';
 import { Photo } from '../utils/photos';
 import { byNameSort, guid, sleep } from '../utils/common';
@@ -22,22 +22,26 @@ interface EditableWorkout {
 
 type State = {
   items: { [id: string]: Workout };
-  sorted: Derive<State, Workout[]>;
+  sorted: Workout[];
   formState: 'initial' | 'editing' | 'saving' | 'saved' | 'failed';
   new: EditableWorkout;
-  isNewValid: Derive<State, boolean>;
+  isNewValid: boolean;
 };
 
 export const state: State = {
   items: {},
-  sorted: (state) => Object.values(state.items).sort(byNameSort),
+  sorted: derived((state: State) =>
+    Object.values(state.items).sort(byNameSort)
+  ),
   formState: 'initial',
   new: {},
-  isNewValid: (state) =>
-    !!state.new.name &&
-    !!state.new.sets &&
-    !!state.new.exercises?.length &&
-    !!state.new.image,
+  isNewValid: derived(
+    (state: State) =>
+      !!state.new.name &&
+      !!state.new.sets &&
+      !!state.new.exercises?.length &&
+      !!state.new.image
+  ),
 };
 
 const updateNewWorkout: Action<EditableWorkout> = ({ state }, updates) => {

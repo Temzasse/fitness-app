@@ -89,8 +89,8 @@ const ExerciseList = styled.div`
   width: 100%;
 
   ul {
-    margin-left: -${(p) => p.theme.spacing.normal};
-    margin-right: -${(p) => p.theme.spacing.normal};
+    margin-left: -${(p) => p.theme.spacing.normal} !important;
+    margin-right: -${(p) => p.theme.spacing.normal} !important;
   }
 `;
 
@@ -105,7 +105,7 @@ const StickyTitle = styled.li`
 `;
 
 const ExerciseRow = styled.li`
-  margin-left: ${(p) => p.theme.spacing.normal};
+  margin-left: ${(p) => p.theme.spacing.normal} !important;
   width: calc(100% - ${(p) => p.theme.spacing.normal});
 `;
 

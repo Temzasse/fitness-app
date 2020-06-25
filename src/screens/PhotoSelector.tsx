@@ -50,6 +50,7 @@ const Wrapper = styled.div`
   height: 100%;
   width: 100%;
   padding: ${(p) => p.theme.spacing.normal};
+  padding-bottom: ${(p) => p.theme.spacing.xlarge};
   overflow: auto;
 `;
 

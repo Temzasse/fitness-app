@@ -121,7 +121,10 @@ const CreateWorkout = () => {
 };
 
 const HeaderImageButton = styled.button`
-  margin-top: -${(p) => p.theme.spacing.normal};
+  margin-top: min(
+    -${(p) => p.theme.spacing.normal},
+    calc(env(safe-area-inset-top) * -1)
+  );
   margin-left: -${(p) => p.theme.spacing.normal};
   margin-right: -${(p) => p.theme.spacing.normal};
 `;
@@ -155,8 +158,8 @@ const ExerciseSelectorLink = styled(Link)`
   padding: ${(p) => p.theme.spacing.small};
   padding-left: ${(p) => p.theme.spacing.normal};
   padding-right: ${(p) => p.theme.spacing.small};
-  margin-left: -${(p) => p.theme.spacing.normal};
-  margin-right: -${(p) => p.theme.spacing.normal};
+  margin-left: -${(p) => p.theme.spacing.normal} !important;
+  margin-right: -${(p) => p.theme.spacing.normal} !important;
   display: flex;
   align-items: center;
   justify-content: space-between;

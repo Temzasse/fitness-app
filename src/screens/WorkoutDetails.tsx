@@ -52,7 +52,6 @@ const Box = styled.div<{ w?: string }>`
 
 const Wrapper = styled.div`
   margin-top: calc(env(safe-area-inset-top) * -1);
-  padding: ${p => p.theme.spacing.normal} 0;
 `;
 
 const HeaderImageBleed = styled.div`

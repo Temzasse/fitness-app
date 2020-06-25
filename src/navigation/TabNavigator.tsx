@@ -9,7 +9,7 @@ import {
   Link,
   useNavigate,
   useLocation,
-  useResolvedLocation,
+  useResolvedPath,
 } from 'react-router-dom';
 
 import { TAB_HEIGHT } from '../utils/constants';
@@ -90,7 +90,7 @@ const Tab: React.FC<
   { baseColor: string; activeColor: string; location: Location } & TabType
 > = ({ to, icon, iconProps, baseColor, activeColor, location }) => {
   const [fullTo, setFullTo] = React.useState(to);
-  const resolvedLocation = useResolvedLocation(to);
+  const resolvedLocation = useResolvedPath(to);
   const isActive = location.pathname.includes(resolvedLocation.pathname);
   const Icon = icon;
 
