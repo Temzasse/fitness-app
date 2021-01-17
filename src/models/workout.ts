@@ -70,7 +70,9 @@ const clearNewWorkout: Action = ({ state }) => {
   state.workouts.new = {};
 };
 
-const saveNewWorkout: AsyncAction<any> = async (
+type Navigate = (to: string, opts?: any) => any;
+
+const saveNewWorkout: AsyncAction<Navigate> = async (
   { state, actions, effects },
   navigate
 ) => {

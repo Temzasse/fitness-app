@@ -81,7 +81,9 @@ const clearNewExercise: Action = ({ state }) => {
   state.exercises.formState = 'initial';
 };
 
-const saveNewExercise: AsyncAction<any> = async (
+type Navigate = (to: string, opts?: any) => any;
+
+const saveNewExercise: AsyncAction<Navigate> = async (
   { state, actions, effects },
   navigate
 ) => {
